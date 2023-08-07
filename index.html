@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS gyakorló / 2-5 lecke</title>
+</head>
+<body>
+    <script>
+
+//------------------------------------------ 3. lecke: ADATTIPUSOK I.--------------------------------------------------------
+// https://www.youtube.com/watch?v=hhEJ3kT_RPQ&ab_channel=K%C3%B3db%C3%A1zis
+
+// primitív típusok: string, number, booelan, undefined, null
+
+// string :
+console.log("szia");
+
+// tegyük nagybetűssé
+// Nézzük meg hány karakterből áll
+// fordítsuk meg (revers)
+// fűzzünk hozzá egy másik stringet
+
+//---------------------------------------------
+
+//number:
+console.log(500);
+
+// adjunk hozzá másik számot
+// vonjunk ki belőle
+// ha elosztjuk egy másik számmal, mennyi a maradéka
+
+//---------------------------------------------------
+
+//boolean:
+
+console.log(true);
+console.log(false);
+
+// logikai (és, vagy)
+//negalas (megfordítja a boolean-t --> Ha true-t negalok akkor false-t kapok, ha false-t negalok, akkor true-t kapok)
+
+//------------------------------------------------------
+
+//undefined  --> az érték a rendszerünkben nincs definiálva
+
+console.log(undefined);
+
+//-----------------------------------------------------
+
+//null ---> az érték definiálva van, csak épp nulla az értéke
+
+console.log(null);
+
+
+
+
+
+// ---------------------------------------- 4. lecke: TÖMB (ADATTIPUSOK II:) --------------------------------------------
+//  https://www.youtube.com/watch?v=tDTesiqO94k&ab_channel=K%C3%B3db%C3%A1zis
+
+// array <>    ... tömb esetében a [ ] zárójelre mindig figyelni kell!!
+// array of ?
+// array<string> 
+    console.log(["első", "második", "harmadik"]);
+// array<number>
+    console.log([1, 2, 3]);
+// szűrhetünk
+// sorba rendezhetjük
+// hozzáadhatunk új eleme(ke)t
+// agregálhatjuk a tömb elemeit
+
+//--------------------------------------------
+
+// index alapú kikérés  ---> pl ha a tömb elemeiből meg szeretném tudni, melyik az 5.szám, akkor ezt a következőképp írjuk ki:
+    console.log([6, 12, 3, 5, 78, 21, 0, 56, 34, 87, 543,][5]);  // az index a nulladik elemmel indul, így az 5. elem a  ---> 21
+
+//-------------------------------------------
+
+// Lehetőség van többféle elemet is beleírni a tömbbe, de nem ajánlott, mert ha hozzáadunk egy másik elemet, akkor a program hibázhat.  
+    console.log([true, 3, "string"]);
+
+//-------------------------------------------
+
+// A tömbök lehetnek többdimenziósak is ---> array<array<number>>  (tömbe tömb)
+    console.log([[1, 2], [3, 4, 6], [66, 45, 77]]);
+// Ha szeretnénk kikérni pl az 1-es tömb 2. elemét, a következő képpen kell kiíratni:
+    console.log([[1, 2], [3, 4, 6], [66, 45, 77]][1][2]);
+
+
+
+
+// --------------------------------------- 5. lecke: OBJEKTUM (ADATTIPUSOK III.) ------------------------------------------------
+//    https://www.youtube.com/watch?v=Xe9xk_6UKN8&ab_channel=K%C3%B3db%C3%A1zis
+
+// object ---> kulcs - értékpárok sorozata   ( a py-ban pl ez a dictionary (szótár)
+
+//   - { } zárójelen belül sorolunk fel kulcs-érték párokat
+//   - egyedileg kell őket megválasztanunk, ugyanolyan névvel 2x nem szerepelhet kulcs
+
+    console.log(
+
+    { firstName:"Sárga",
+      lastName: "Csirke",
+       age: 2
+    }
+    )
+
+// lookup művelet ---> kulcs alapú kikérés  ---> ehhez kell a .(pont) és utánaírni, mire van szükségünk:
+
+    console.log(
+       { firstName:"Sárga",
+         lastName: "Csirke",
+         age: 2
+       }.lastName
+    )
+
+// Explicit kulccsal is kikérhetjük  ---> itt a tömb elemét fogjuk kiíratni:
+    console.log(
+       { firstName:"Sárga",
+         lastName: "Csirke",
+         age: 2
+       }['lastName']
+    )
+
+//-----------------------------------------
+
+// Összekombinálható az összes adattípussal ---> a kulcs-érték párok között vannak újabb kulcs-érték párok (kulcs érték párban a kulcs-érték pár):
+    console.log(
+       { firstName:"Sárga",
+         lastName: "Csirke",
+         age: 2,
+         address: {
+            street : "Málna u",
+            city: "Debrecen",
+            number: 6
+         }
+       }
+    );
+
+// Ha ki szeretnénk kérni az utcanevet :
+
+console.log(
+   { firstName:"Sárga",
+     lastName: "Csirke",
+     age: 2,
+     address: {
+        street : "Málna u",
+        city: "Debrecen",
+        number: 6
+     }
+   }.address.street
+);
+
+// Tömböt is beletehetünk, miután kikérjük az első telefonszámot:
+
+console.log(
+   { firstName:"Sárga",
+     lastName: "Csirke",
+     age: 2,
+     telephonNumber:['06302562335', "06302348765", '670243233353'],
+     address: {
+        street : "Málna u",
+        city: "Debrecen",
+        number: 6
+     }
+   }.telephonNumber[0]
+);
+
+//-----------------------------------------
+
+// A tömbben kompozit adatcsomagok (objektumok) vannak... jelen esetben egy telefont akarunk kiíratni. 
+// Ahány készüléket íratunk ki, annyiszor kell log-olni.
+
+console.log(
+    [
+        {
+           brand: "Apple",     // márka
+           name: "Phone X",
+           price: 250000,     //ár
+           provider: {                    // szolgáltató
+               country: "HU",
+               name:"Vodafone"
+           }                      
+        },    
+    
+     {
+        brand: "Huawei",    
+        name: "10",
+        price: 150000,     
+        provider: {                    
+            country: "DE",
+            name:"T-mobile"
+        }                      
+     },
+ 
+     {
+        brand: "ZTE",     
+        name: "X2",
+        price: 120000,     
+        provider: {                    
+            country: "HU",
+            name:"Vodafone"
+        }                      
+     }
+ ]
+);
+
+// Feladat: - Kérjük ki az első telefon nevét:
+console.log(
+    [
+        {
+           brand: "Apple",     // márka
+           name: "Phone X",
+           price: 250000,     //ár
+           provider: {                    // szolgáltató
+               country: "HU",
+               name:"Vodafone"
+           }                      
+        },    
+    
+     {
+        brand: "Huawei",    
+        name: "10",
+        price: 150000,     
+        provider: {                    
+            country: "DE",
+            name:"T-mobile"
+        }                      
+     },
+ 
+     {
+        brand: "ZTE",     
+        name: "X2",
+        price: 120000,     
+        provider: {                    
+            country: "HU",
+            name:"Vodafone"
+        }                      
+     }
+ ][0].name
+);
+
+//-----------------------------------------
+
+//          - Kérjük ki a második telefon árát:
+
+console.log(
+    [
+        {
+           brand: "Apple",     // márka
+           name: "Phone X",
+           price: 250000,     //ár
+           provider: {                    // szolgáltató
+               country: "HU",
+               name:"Vodafone"
+           }                      
+        },    
+    
+     {
+        brand: "Huawei",    
+        name: "10",
+        price: 150000,     
+        provider: {                    
+            country: "DE",
+            name:"T-mobile"
+        }                      
+     },
+ 
+     {
+        brand: "ZTE",     
+        name: "X2",
+        price: 120000,     
+        provider: {                    
+            country: "HU",
+            name:"Vodafone"
+        }                      
+     }
+ ][1].price
+);
+
+//--------------------------------------------
+
+//          - Kérjük ki a 3. telefon szolgáltatójának az országát:
+
+console.log(
+    [
+        {
+           brand: "Apple",     // márka
+           name: "Phone X",
+           price: 250000,     //ár
+           provider: {                    // szolgáltató
+               country: "HU",
+               name:"Vodafone"
+           }                      
+        },    
+    
+     {
+        brand: "Huawei",    
+        name: "10",
+        price: 150000,     
+        provider: {                    
+            country: "DE",
+            name:"T-mobile"
+        }                      
+     },
+ 
+     {
+        brand: "ZTE",     
+        name: "X2",
+        price: 120000,     
+        provider: {                    
+            country: "HU",
+            name:"Vodafone"
+        }                      
+     }
+ ][2].provider.country
+);
+
+//-----------------------------------
+
+// Egy számítógépes program 2 fő komponense ---> adatok és operációk
+
+
+    </script>
+
+
+</body>
+</html>
